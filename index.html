@@ -1,0 +1,148 @@
+<!-- Created by Luis Tito Salinas Garcia --> 
+ 
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CATALOGO DRAGON KAI</title>
+         <style type="text/css">
+             
+/* Created by Luis Tito Salinas Garcia */ 
+ 
+body {
+    background: #000;
+    color:#fff;
+    text-align:center;
+}
+
+h2 {
+    color:#323232;
+}
+.container {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#frame {
+    overflow: hidden;
+    width: calc(28vh + 28vw);
+    height: calc(28vh + 28vw);
+    padding: 15px;
+    background: #d8d8d8;
+    border-radius: 30px;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+}
+
+.images {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    background-color: #292929;
+    border-radius: 16px;
+    object-fit: cover;
+    margin-right: 26px;
+    position: relative;
+    transition: 1s;
+}
+
+.buttons {
+    position: relative;
+    bottom: 40px;
+    display: flex;
+    justify-content: center;
+    mix-blend-mode: difference;
+}
+
+button {
+    border: none;
+    width: 30px;
+    height: 30px;
+    background: #666666;
+    color: white;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+#prev {
+    border-radius: 5px 0 0 5px;
+}
+
+#next {
+    border-radius: 0 5px 5px 0;
+}
+         </style>
+    </head>
+
+    <body>
+        <!--<h1>CATALOGO </h1><br /><h2>DRAGON KAI <br />
+        VIRTUAL STORE</h2>--> 
+ 
+        <br />
+
+        <div class="container">
+            <div id="frame">
+                <div class="images">
+                    <img id="image1" class="image" src="">
+                    <img id="image2" class="image" src="">
+                </div>
+                <div class="buttons">
+                    <button id="prev">&lt;</button>
+                    <button id="next">&gt;</button>
+                </div>
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+            var frame, image, btnNext, btnPrev;
+            document.body.onload = ()=>{
+                pictures.map(url => preloadImage(url));
+                frame = document.getElementById('frame');
+                image1 = document.getElementById('image1');
+                image2 = document.getElementById('image2');
+                btnNext = document.getElementById('next');
+                btnPrev = document.getElementById('prev');
+            
+                image1.src = pictures[0];
+                image2.src = pictures[1];
+            
+                btnNext.addEventListener('click', ()=>changePic(1));
+                btnPrev.addEventListener('click', ()=>changePic(-1));
+            
+                changePic(1);
+            };
+
+            Number.prototype.mod = function(n) { return ((this % n) + n) % n; };
+var godRange = (max,num,min=0)=>(num.mod(max - min)) + min;
+
+var pictures = ["https://i.ibb.co/gPZCXYg/Morskie-Oko.jpg", 'https://i.ibb.co/kqtDYBy/space.png', 'http://paranoidandroid.co/assets/wallpapers/2018/submerged_desktop_thumb.jpg', 'https://static1.squarespace.com/static/50640553e4b0e9530e2dfb13/5076b0f084ae1ac54deb3842/5cdad4ace2c483e015341ffd/1557852067755/op7_header.jpg?format=2500w', 'https://imgnooz.com/sites/default/files/wallpaper/travel/67097/street-wallpapers-67097-7450037.jpg']
+
+var x = -1;
+var changePic = arg => {
+    x = godRange(pictures.length, x + arg, 0);
+
+    image1.style.left = ["0", "calc( -28vh - 28vw - 26px )"][x.mod(2)];
+    image2.style.left = ["0", "calc( -28vh - 28vw - 26px )"][x.mod(2)];
+
+    x.mod(2) ? image2.src = pictures[x] : image1.src = pictures[x];
+
+};
+
+var preloadImage = url => {
+    var img=new Image();
+    img.src=url;
+}
+        </script>
+    </body>
+</html>
